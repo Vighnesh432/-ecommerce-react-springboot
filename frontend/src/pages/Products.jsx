@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard.jsx";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/products")
@@ -9,17 +11,25 @@ function Products() {
       .then((data) => setProducts(data));
   }, []);
 
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+    alert(`${product.name} added to cart`);
+  };
+
   return (
     <div>
       <h1>Products</h1>
-      {products.map((product) => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p>${product.price}</p>
-          <p>Stock: {product.stock}</p>
-        </div>
-      ))}
+      <h3>Cart Items: {cart.length}</h3>
+
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+          />
+        ))}
+      </div>
     </div>
   );
 }
