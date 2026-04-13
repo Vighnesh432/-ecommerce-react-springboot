@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard.jsx";
 
-function Products() {
+function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/products")
@@ -19,7 +19,7 @@ function Products() {
   return (
     <div>
       <h1>Products</h1>
-      <h3>Cart Items: {cart.length}</h3>
+      <Link to="/cart">Go to Cart ({cart.length})</Link>
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {products.map((product) => (
