@@ -65,7 +65,9 @@ function Cart({ cart, setCart }) {
 
           <h2>Total: ${total.toFixed(2)}</h2>
 
-          <button>Proceed to Checkout</button>
+          <Link to="/checkout">
+  <button>Proceed to Checkout</button>
+</Link>
         </>
       )}
     </div>
