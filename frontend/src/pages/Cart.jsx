@@ -1,12 +1,36 @@
 import { Link } from "react-router-dom";
 
 function Cart({ cart, setCart }) {
-  const removeFromCart = (indexToRemove) => {
-    const updatedCart = cart.filter((_, index) => index !== indexToRemove);
+  const increaseQuantity = (id) => {
+    const updatedCart = cart.map((item) =>
+      item.id === id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
     setCart(updatedCart);
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const decreaseQuantity = (id) => {
+    const updatedCart = cart
+      .map((item) =>
+        item.id === id
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+      .filter((item) => item.quantity > 0);
+
+    setCart(updatedCart);
+  };
+
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+  };
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <div>
@@ -17,9 +41,9 @@ function Cart({ cart, setCart }) {
         <p>Cart is empty</p>
       ) : (
         <>
-          {cart.map((item, index) => (
+          {cart.map((item) => (
             <div
-              key={index}
+              key={item.id}
               style={{
                 border: "1px solid #ddd",
                 padding: "10px",
@@ -29,7 +53,11 @@ function Cart({ cart, setCart }) {
             >
               <h3>{item.name}</h3>
               <p>${item.price}</p>
-              <button onClick={() => removeFromCart(index)}>
+              <p>Quantity: {item.quantity}</p>
+
+              <button onClick={() => increaseQuantity(item.id)}>+</button>
+              <button onClick={() => decreaseQuantity(item.id)}>-</button>
+              <button onClick={() => removeFromCart(item.id)}>
                 Remove
               </button>
             </div>
