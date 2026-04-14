@@ -29,6 +29,10 @@ function Login() {
     );
 
     if (response.ok) {
+      const data = await response.json();
+
+      localStorage.setItem("loggedInUser", JSON.stringify(data));
+
       alert("Login successful!");
       navigate("/");
     } else {
