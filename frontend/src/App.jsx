@@ -4,6 +4,8 @@ import Products from "./pages/Products.jsx";
 import Cart from "./pages/Cart.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import OrderSuccess from "./pages/OrderSuccess.jsx";
+import Signup from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -31,6 +33,8 @@ function App() {
           element={<Checkout cart={cart} setCart={setCart} />}
         />
         <Route path="/success" element={<OrderSuccess />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
