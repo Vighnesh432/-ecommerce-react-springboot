@@ -8,7 +8,7 @@ function ProductCard(props) {
 
   return (
     <div className="border rounded-2xl shadow-md p-6">
-      <h2 className="text-xl font-bold mb-2">
+      <h2 className="border rounded-lg py-2 hover:shadow-md transition">
         {product.name}
       </h2>
 

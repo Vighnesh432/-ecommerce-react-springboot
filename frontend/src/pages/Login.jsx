@@ -31,9 +31,11 @@ function Login() {
     if (response.ok) {
       const data = await response.json();
 
-      localStorage.setItem("loggedInUser", JSON.stringify(data));
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify(data)
+      );
 
-      alert("Login successful!");
       navigate("/");
     } else {
       alert("Invalid credentials");
@@ -41,30 +43,40 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="border shadow-md rounded-2xl p-8 w-96">
+        <h1 className="text-3xl font-bold mb-6">
+          Login
+        </h1>
 
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        onChange={handleChange}
-      />
-      <br />
+        <input
+          className="border w-full px-4 py-2 rounded-lg mb-4"
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
 
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        onChange={handleChange}
-      />
-      <br />
+        <input
+          className="border w-full px-4 py-2 rounded-lg mb-4"
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
 
-      <button onClick={handleLogin}>Login</button>
+        <button
+          className="w-full border rounded-lg py-2"
+          onClick={handleLogin}
+        >
+          Login
+        </button>
 
-      <p>
-        Don't have an account? <Link to="/signup">Signup</Link>
-      </p>
+        <p className="mt-4">
+          Don&apos;t have an account?{" "}
+          <Link to="/signup">Signup</Link>
+        </p>
+      </div>
     </div>
   );
 }

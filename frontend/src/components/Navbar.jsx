@@ -9,12 +9,12 @@ function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between px-8 py-4 shadow-md bg-white">
+    <nav className="flex flex-col sm:flex-row items-center      justify-between px-4 sm:px-8 py-4 shadow-md bg-white gap-4">
       <div className="text-2xl font-bold">
         <Link to="/">ShopEase</Link>
       </div>
 
-      <div className="flex gap-6 items-center">
+      <div className="flex flex-wrap gap-4 sm:gap-6 items-center justify-center">
         <Link to="/">Products</Link>
         <Link to="/cart">Cart</Link>
 
