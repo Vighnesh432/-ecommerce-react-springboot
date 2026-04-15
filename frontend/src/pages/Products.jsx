@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard.jsx";
 
 function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
 
   const fetchProducts = () => {
     fetch("http://localhost:8080/api/products")
@@ -40,8 +41,6 @@ function Products({ cart, setCart }) {
         }
       ]);
     }
-
-    alert(`${product.name} added to cart`);
   };
 
   const deleteProduct = async (id) => {
@@ -53,28 +52,50 @@ function Products({ cart, setCart }) {
     );
 
     if (response.ok) {
-      alert("Product deleted successfully");
       fetchProducts();
-    } else {
-      alert("Delete failed");
     }
   };
 
+  const filteredProducts = products
+    .filter((product) =>
+      product.name
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortOrder === "low") return a.price - b.price;
+      if (sortOrder === "high") return b.price - a.price;
+      return 0;
+    });
+
   return (
-    <div>
-      <h1>Products</h1>
+    <div className="p-8">
+      <h1 className="text-4xl font-bold mb-6">
+        Products
+      </h1>
 
-      <Link to="/cart">
-        Go to Cart ({cart.length})
-      </Link>
+      <div className="flex gap-4 mb-8">
+        <input
+          className="border px-4 py-2 rounded-lg"
+          type="text"
+          placeholder="Search product..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap"
-        }}
-      >
-        {products.map((product) => (
+        <select
+          className="border px-4 py-2 rounded-lg"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="">Sort by Price</option>
+          <option value="low">Low to High</option>
+          <option value="high">High to Low</option>
+        </select>
+      </div>
+
+      <div className="grid grid-cols-3 gap-6">
+        {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}

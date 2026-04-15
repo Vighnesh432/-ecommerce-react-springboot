@@ -9,27 +9,42 @@ function Navbar() {
   };
 
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <Link to="/">Products</Link> |{" "}
-      <Link to="/cart">Cart</Link> |{" "}
-      {user && (
-        <>
-          <Link to="/add-product">Add Product</Link> |{" "}
-          <Link to="/orders">Orders</Link> |{" "}
-        </>
-      )}
-      {user ? (
-        <>
-          <span>Welcome, {user.name}</span> |{" "}
-          <button onClick={logout}>Logout</button>
-        </>
-      ) : (
-        <>
-          <Link to="/login">Login</Link> |{" "}
-          <Link to="/signup">Signup</Link>
-        </>
-      )}
-    </div>
+    <nav className="flex items-center justify-between px-8 py-4 shadow-md bg-white">
+      <div className="text-2xl font-bold">
+        <Link to="/">ShopEase</Link>
+      </div>
+
+      <div className="flex gap-6 items-center">
+        <Link to="/">Products</Link>
+        <Link to="/cart">Cart</Link>
+
+        {user && (
+          <>
+            <Link to="/add-product">Add Product</Link>
+            <Link to="/orders">Orders</Link>
+          </>
+        )}
+
+        {user ? (
+          <>
+            <span className="font-medium">
+              Welcome, {user.name}
+            </span>
+            <button
+              onClick={logout}
+              className="px-4 py-2 border rounded-lg"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Signup</Link>
+          </>
+        )}
+      </div>
+    </nav>
   );
 }
 

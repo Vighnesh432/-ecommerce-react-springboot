@@ -4,46 +4,50 @@ function ProductCard(props) {
   const { product, addToCart, deleteProduct } = props;
   const navigate = useNavigate();
 
-  if (!product) {
-    return null;
-  }
+  if (!product) return null;
 
   return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        padding: "20px",
-        margin: "10px",
-        borderRadius: "10px",
-        width: "250px"
-      }}
-    >
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-      <p>${product.price}</p>
-      <p>Stock: {product.stock}</p>
+    <div className="border rounded-2xl shadow-md p-6">
+      <h2 className="text-xl font-bold mb-2">
+        {product.name}
+      </h2>
 
-      <button onClick={() => addToCart(product)}>
-        Add to Cart
-      </button>
+      <p className="text-gray-600 mb-2">
+        {product.description}
+      </p>
 
-      <br />
-      <br />
+      <p className="font-semibold mb-2">
+        ${product.price}
+      </p>
 
-      <button
-        onClick={() =>
-          navigate("/edit-product", { state: product })
-        }
-      >
-        Edit Product
-      </button>
+      <p className="mb-4">
+        Stock: {product.stock}
+      </p>
 
-      <br />
-      <br />
+      <div className="flex flex-col gap-2">
+        <button
+          className="border rounded-lg py-2"
+          onClick={() => addToCart(product)}
+        >
+          Add to Cart
+        </button>
 
-      <button onClick={() => deleteProduct(product.id)}>
-        Delete Product
-      </button>
+        <button
+          className="border rounded-lg py-2"
+          onClick={() =>
+            navigate("/edit-product", { state: product })
+          }
+        >
+          Edit Product
+        </button>
+
+        <button
+          className="border rounded-lg py-2"
+          onClick={() => deleteProduct(product.id)}
+        >
+          Delete Product
+        </button>
+      </div>
     </div>
   );
 }
