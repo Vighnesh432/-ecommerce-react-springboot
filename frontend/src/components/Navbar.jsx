@@ -7,14 +7,19 @@ function Navbar() {
 
   const logout = () => {
     localStorage.removeItem("loggedInUser");
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   return (
     <div style={{ marginBottom: "20px" }}>
       <Link to="/">Products</Link> |{" "}
       <Link to="/cart">Cart</Link> |{" "}
-      {user && <Link to="/orders">Orders</Link>} |{" "}
+      {user && (
+        <>
+          <Link to="/add-product">Add Product</Link> |{" "}
+          <Link to="/orders">Orders</Link> |{" "}
+        </>
+      )}
       {user ? (
         <>
           <span>Welcome, {user.name}</span> |{" "}

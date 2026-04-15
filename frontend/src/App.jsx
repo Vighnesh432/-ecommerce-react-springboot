@@ -11,6 +11,7 @@ import OrderSuccess from "./pages/OrderSuccess.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import Orders from "./pages/Orders.jsx";
+import AddProduct from "./pages/AddProduct.jsx";
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -46,13 +47,21 @@ function App() {
            }
           />
         <Route
-         path="/orders"
+          path="/orders"
           element={
-           <ProtectedRoute>
-             <Orders />
+            <ProtectedRoute>
+              <Orders />
             </ProtectedRoute>
            }
          />
+        <Route
+          path="/add-product"
+          element={
+            <ProtectedRoute>
+             <AddProduct />
+           </ProtectedRoute>
+          }
+       /> 
 
         <Route path="/success" element={<OrderSuccess />} />
         <Route path="/signup" element={<Signup />} />
