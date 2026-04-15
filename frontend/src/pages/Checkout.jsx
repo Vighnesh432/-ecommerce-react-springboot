@@ -3,15 +3,37 @@ import { useNavigate } from "react-router-dom";
 function Checkout({ cart, setCart }) {
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  const placeOrder = () => {
-    alert("Order placed successfully!");
-    setCart([]);
-    navigate("/success");
+  const placeOrder = async () => {
+    const orderData = {
+      userEmail: user.email,
+      totalAmount: total
+    };
+
+    const response = await fetch(
+      "http://localhost:8080/api/orders",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderData)
+      }
+    );
+
+    if (response.ok) {
+      alert("Order placed successfully!");
+      setCart([]);
+      navigate("/success");
+    } else {
+      alert("Failed to place order");
+    }
   };
 
   return (
