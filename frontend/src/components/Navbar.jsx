@@ -1,8 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const navigate = useNavigate();
-
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
   const logout = () => {

@@ -5,10 +5,14 @@ import ProductCard from "../components/ProductCard.jsx";
 function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
+  const fetchProducts = () => {
     fetch("http://localhost:8080/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   const addToCart = (product) => {
@@ -28,6 +32,22 @@ function Products({ cart, setCart }) {
     alert(`${product.name} added to cart`);
   };
 
+  const deleteProduct = async (id) => {
+    const response = await fetch(
+      `http://localhost:8080/api/products/${id}`,
+      {
+        method: "DELETE"
+      }
+    );
+
+    if (response.ok) {
+      alert("Product deleted successfully");
+      fetchProducts();
+    } else {
+      alert("Delete failed");
+    }
+  };
+
   return (
     <div>
       <h1>Products</h1>
@@ -39,6 +59,7 @@ function Products({ cart, setCart }) {
             key={product.id}
             product={product}
             addToCart={addToCart}
+            deleteProduct={deleteProduct}
           />
         ))}
       </div>

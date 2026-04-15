@@ -18,12 +18,17 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getProducts() {
+    public List<Product> getAllProducts() {
         return service.getAllProducts();
     }
 
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
         return service.addProduct(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        service.deleteProduct(id);
     }
 }

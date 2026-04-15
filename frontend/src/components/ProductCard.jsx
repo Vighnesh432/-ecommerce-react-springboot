@@ -1,4 +1,4 @@
-function ProductCard({ product, addToCart }) {
+function ProductCard({ product, addToCart, deleteProduct }) {
   return (
     <div
       style={{
@@ -16,6 +16,13 @@ function ProductCard({ product, addToCart }) {
 
       <button onClick={() => addToCart(product)}>
         Add to Cart
+      </button>
+
+      <br />
+      <br />
+
+      <button onClick={() => deleteProduct(product.id)}>
+        Delete Product
       </button>
     </div>
   );
