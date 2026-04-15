@@ -12,6 +12,7 @@ import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import Orders from "./pages/Orders.jsx";
 import AddProduct from "./pages/AddProduct.jsx";
+import EditProduct from "./pages/EditProduct.jsx";
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -60,8 +61,16 @@ function App() {
             <ProtectedRoute>
              <AddProduct />
            </ProtectedRoute>
-          }
-       /> 
+           }
+         /> 
+        <Route
+          path="/edit-product"
+          element={
+            <ProtectedRoute>
+             <EditProduct />
+            </ProtectedRoute>
+            }
+         /> 
 
         <Route path="/success" element={<OrderSuccess />} />
         <Route path="/signup" element={<Signup />} />

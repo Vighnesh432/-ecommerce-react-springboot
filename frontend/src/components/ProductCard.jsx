@@ -1,4 +1,13 @@
-function ProductCard({ product, addToCart, deleteProduct }) {
+import { useNavigate } from "react-router-dom";
+
+function ProductCard(props) {
+  const { product, addToCart, deleteProduct } = props;
+  const navigate = useNavigate();
+
+  if (!product) {
+    return null;
+  }
+
   return (
     <div
       style={{
@@ -16,6 +25,17 @@ function ProductCard({ product, addToCart, deleteProduct }) {
 
       <button onClick={() => addToCart(product)}>
         Add to Cart
+      </button>
+
+      <br />
+      <br />
+
+      <button
+        onClick={() =>
+          navigate("/edit-product", { state: product })
+        }
+      >
+        Edit Product
       </button>
 
       <br />

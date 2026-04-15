@@ -16,17 +16,29 @@ function Products({ cart, setCart }) {
   }, []);
 
   const addToCart = (product) => {
-    const existingProduct = cart.find((item) => item.id === product.id);
+    const existingProduct = cart.find(
+      (item) => item.id === product.id
+    );
 
     if (existingProduct) {
       const updatedCart = cart.map((item) =>
         item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
+          ? {
+              ...item,
+              quantity: item.quantity + 1
+            }
           : item
       );
+
       setCart(updatedCart);
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart([
+        ...cart,
+        {
+          ...product,
+          quantity: 1
+        }
+      ]);
     }
 
     alert(`${product.name} added to cart`);
@@ -51,9 +63,17 @@ function Products({ cart, setCart }) {
   return (
     <div>
       <h1>Products</h1>
-      <Link to="/cart">Go to Cart ({cart.length})</Link>
 
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <Link to="/cart">
+        Go to Cart ({cart.length})
+      </Link>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap"
+        }}
+      >
         {products.map((product) => (
           <ProductCard
             key={product.id}
