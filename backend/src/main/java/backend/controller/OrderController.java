@@ -4,6 +4,8 @@ import backend.entity.Order;
 import backend.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders")
 @CrossOrigin("*")
@@ -18,5 +20,10 @@ public class OrderController {
     @PostMapping
     public Order createOrder(@RequestBody Order order) {
         return service.saveOrder(order);
+    }
+
+    @GetMapping("/{email}")
+    public List<Order> getOrders(@PathVariable String email) {
+        return service.getOrdersByUserEmail(email);
     }
 }

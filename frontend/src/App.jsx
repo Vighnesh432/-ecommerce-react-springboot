@@ -10,6 +10,7 @@ import Checkout from "./pages/Checkout.jsx";
 import OrderSuccess from "./pages/OrderSuccess.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
+import Orders from "./pages/Orders.jsx";
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -42,8 +43,16 @@ function App() {
             <ProtectedRoute>
               <Checkout cart={cart} setCart={setCart} />
             </ProtectedRoute>
-          }
-        />
+           }
+          />
+        <Route
+         path="/orders"
+          element={
+           <ProtectedRoute>
+             <Orders />
+            </ProtectedRoute>
+           }
+         />
 
         <Route path="/success" element={<OrderSuccess />} />
         <Route path="/signup" element={<Signup />} />

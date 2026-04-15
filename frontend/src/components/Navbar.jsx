@@ -14,6 +14,7 @@ function Navbar() {
     <div style={{ marginBottom: "20px" }}>
       <Link to="/">Products</Link> |{" "}
       <Link to="/cart">Cart</Link> |{" "}
+      {user && <Link to="/orders">Orders</Link>} |{" "}
       {user ? (
         <>
           <span>Welcome, {user.name}</span> |{" "}
